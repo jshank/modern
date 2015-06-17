@@ -295,7 +295,7 @@ function exportEventFrames( $event, $exportDetail, $exportImages )
 {
     global $SLANG;
 
-    $sql = "select *, unix_timestamp( TimeStamp ) as UnixTimeStamp from Frames where EventID = '".dbEscape($event['Id'])."' order by FrameId";
+    $sql = "select *, unix_timestamp( TimeStamp ) as UnixTimeStamp from Frames where EventID = ".dbEscape($event['Id'])." order by FrameId";
     $frames = dbFetchAll( $sql );
 
     ob_start();
@@ -771,7 +771,7 @@ function exportEventImagesMaster( $eids )
 <?php
 	foreach ($eids as $eid) {
 		//get monitor id and event id
-        $sql = "select E.Id,E.MonitorId,M.Name As MonitorName,M.Width,M.Height,E.Name,E.Cause,E.Notes,E.StartTime,E.Length,E.Frames,E.AlarmFrames,E.TotScore,E.AvgScore,E.MaxScore,E.Archived from Monitors as M inner join Events as E on (M.Id = E.MonitorId) where E.Id = '".dbEscape($eid)."'";
+        $sql = "select E.Id,E.MonitorId,M.Name As MonitorName,M.Width,M.Height,E.Name,E.Cause,E.Notes,E.StartTime,E.Length,E.Frames,E.AlarmFrames,E.TotScore,E.AvgScore,E.MaxScore,E.Archived from Monitors as M inner join Events as E on (M.Id = E.MonitorId) where E.Id = ".dbEscape($eid);
 		$events[$eid] = dbFetchOne( $sql );
 		$eventMonitorId[$eid] = $events[$eid]['MonitorId'];
 	}
@@ -936,7 +936,7 @@ function exportFileList( $eid, $exportDetail, $exportFrames, $exportImages, $exp
     //if ( canView( 'Events' ) && $eid )
     if ( $eid )
     {
-        $sql = "select E.Id,E.MonitorId,M.Name As MonitorName,M.Width,M.Height,E.Name,E.Cause,E.Notes,E.StartTime,E.Length,E.Frames,E.AlarmFrames,E.TotScore,E.AvgScore,E.MaxScore,E.Archived from Monitors as M inner join Events as E on (M.Id = E.MonitorId) where E.Id = '".dbEscape($eid)."'";
+        $sql = "select E.Id,E.MonitorId,M.Name As MonitorName,M.Width,M.Height,E.Name,E.Cause,E.Notes,E.StartTime,E.Length,E.Frames,E.AlarmFrames,E.TotScore,E.AvgScore,E.MaxScore,E.Archived from Monitors as M inner join Events as E on (M.Id = E.MonitorId) where E.Id = ".dbEscape($eid);
         $event = dbFetchOne( $sql );
 		$eventPath =  mygetEventPath( $event );
 		$eventRoot = 'events/'.myEventRoot ($event);

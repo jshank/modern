@@ -27,7 +27,7 @@ $sql = "SELECT E.Id,E.MonitorId,E.StartTime,M.Name As MonitorName,M.Width,M.Heig
 		 WHERE (M.Name = '$MonitorName') 
 		 ORDER BY ".$order_by_definition[$order_by]."
 		 LIMIT $offset,".$events_per_page;
-$result = mysql_query($sql) or die('Error, selecting monitors failed.');
+$result = mysql_query($sql) or die('Error, selecting monitors in getEventsThumbs.php failed.');
 $count = mysql_num_rows($result);
 ?>
 <div>

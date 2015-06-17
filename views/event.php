@@ -29,10 +29,11 @@ $fid = !empty($_REQUEST['fid'])?validInt($_REQUEST['fid']):1;
 
 if ( $user['MonitorIds'] )
     $midSql = " and MonitorId in (".join( ",", preg_split( '/["\'\s]*,["\'\s]*/', dbEscape($user['MonitorIds']) ) ).")";
+    //$midSql = " and MonitorId in (".join( ",", preg_split( '/["\'\s]*,["\'\s]*/', dbEscape($user['MonitorIds']) ) ).")";
 else
     $midSql = '';
 
-$sql = "select E.*,M.Name as MonitorName,M.Id as mid, M.Width,M.Height,M.DefaultRate,M.DefaultScale from Events as E inner join Monitors as M on E.MonitorId = M.Id where E.Id = '".dbEscape($eid)."'".$midSql;
+$sql = "select E.*,M.Name as MonitorName,M.Id as mid, M.Width,M.Height,M.DefaultRate,M.DefaultScale from Events as E inner join Monitors as M on E.MonitorId = M.Id where E.Id = ".dbEscape($eid).$midSql;
 $event = dbFetchOne( $sql );
 
 if ( isset( $_REQUEST['rate'] ) )

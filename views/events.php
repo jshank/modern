@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 
 xhtmlHeaders(__FILE__, $SLANG['Events'] );
 
@@ -28,7 +30,7 @@ xhtmlHeaders(__FILE__, $SLANG['Events'] );
 <div id="sidebar">
 	<div id="sidebarHistory">
 		<h2>Events</h2>
-		<fieldset><legend>Monitors</legend>
+		<fieldset><legend>My Monitors</legend>
 			<ul id="monitors_search"></ul>
 		</fieldset>
  
